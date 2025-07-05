@@ -1,0 +1,369 @@
+/* Modern One UI 7 + iOS inspired styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Base colors */
+  --background-light: #f8f9fc;
+  --background-dark: #0d0d0d;
+  --card-light: #ffffff;
+  --card-dark: #1a1a1a;
+  --text-primary-light: #111827;
+  --text-primary-dark: #f9fafb;
+  --text-secondary-light: #4b5563;
+  --text-secondary-dark: #9ca3af;
+  --border-light: rgba(0, 0, 0, 0.06);
+  --border-dark: rgba(255, 255, 255, 0.06);
+  
+  /* Primary brand colors */
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-active: #3730a3;
+  --primary-light: rgba(79, 70, 229, 0.1);
+  --primary-dark: rgba(79, 70, 229, 0.8);
+  
+  /* iOS & One UI 7 Specific */
+  --ios-blur-light: rgba(255, 255, 255, 0.72);
+  --ios-blur-dark: rgba(30, 30, 30, 0.8);
+  --ios-card-border-light: rgba(255, 255, 255, 0.5);
+  --ios-card-border-dark: rgba(255, 255, 255, 0.08);
+  --ios-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --ios-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+body {
+  font-family: 'SF Pro Display', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-light);
+  color: var(--text-primary-light);
+  letter-spacing: -0.015em;
+  line-height: 1.5;
+}
+
+.dark body {
+  background-color: var(--background-dark);
+  color: var(--text-primary-dark);
+}
+
+/* Modern iOS/One UI 7 card design */
+.modern-card {
+  background-color: var(--card-light);
+  border-radius: 24px;
+  box-shadow: var(--ios-shadow-light);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .modern-card {
+  background-color: var(--card-dark);
+  border-color: var(--border-dark);
+  box-shadow: var(--ios-shadow-dark);
+}
+
+.modern-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.09);
+}
+
+.dark .modern-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Modern button styles - iOS/One UI 7 hybrid */
+.btn-modern {
+  border-radius: 12px;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-modern:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
+}
+
+.btn-modern:hover:after {
+  opacity: 1;
+}
+
+.btn-modern:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2);
+}
+
+.btn-modern:active:after {
+  opacity: 0.4;
+}
+
+/* Modern form inputs - iOS/One UI 7 style */
+.input-modern {
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
+  background-color: var(--card-light);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dark .input-modern {
+  border-color: var(--border-dark);
+  background-color: var(--card-dark);
+}
+
+.input-modern:focus {
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+  border-color: var(--primary-color);
+}
+
+/* Enhanced Glassmorphism effects - iOS style */
+.glass-effect {
+  background: var(--ios-blur-light);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ios-card-border-light);
+}
+
+.dark .glass-effect {
+  background: var(--ios-blur-dark);
+  border: 1px solid var(--ios-card-border-dark);
+}
+
+/* iOS/One UI Badge styles */
+.badge-modern {
+  border-radius: 100px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Enhanced animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  button, 
+  a, 
+  input[type="checkbox"] {
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+  }
+  
+  body {
+    font-size: 1rem;
+  }
+  
+  input, select {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+  
+  .btn-modern {
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .modern-card {
+    border-radius: 20px;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix for iOS Safari 100vh issue */
+.min-h-screen {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* Prevent content shift on page load */
+body {
+  overflow-y: scroll;
+}
+
+/* Enhanced Floating action button - iOS style */
+.fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  z-index: 50;
+  background-color: var(--primary-color);
+  color: white;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fab:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fab:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo animation */
+.logo {
+  height: 2.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em rgba(79, 70, 229, 0.8));
+}
+
+/* Enhanced focus styles */
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Loading and transition effects */
+.skeleton-loading {
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.06) 25%, 
+    rgba(0, 0, 0, 0.15) 37%, 
+    rgba(0, 0, 0, 0.06) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeletonLoading 1.4s ease infinite;
+}
+
+.dark .skeleton-loading {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.06) 25%, 
+    rgba(255, 255, 255, 0.15) 37%, 
+    rgba(255, 255, 255, 0.06) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeletonLoading 1.4s ease infinite;
+}
+
+@keyframes skeletonLoading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* Line clamp for text truncation */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
