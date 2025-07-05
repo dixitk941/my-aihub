@@ -367,3 +367,95 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Hide scrollbar but maintain scrollability */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile comparison table styles */
+.mobile-compare-table {
+  /* Smooth scrolling on mobile */
+  scroll-behavior: smooth;
+  /* Better touch scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Snap to prevent awkward mid-scroll positions */
+  scroll-snap-type: x proximity;
+  /* Ensure proper scrolling on all devices */
+  overscroll-behavior-x: contain;
+}
+
+.mobile-compare-table table {
+  /* Allow flexible table layout */
+  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  /* Minimum width to ensure horizontal scroll */
+  min-width: 100%;
+}
+
+.mobile-compare-table th,
+.mobile-compare-table td {
+  /* Allow wrapping in content cells, but not header */
+  white-space: normal;
+  /* Add scroll snap points */
+  scroll-snap-align: start;
+  /* Ensure minimum cell size */
+  min-width: 120px;
+}
+
+/* Keep sticky header cells from wrapping */
+.mobile-compare-table th.sticky,
+.mobile-compare-table td.sticky {
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+/* Sticky column shadow effect */
+.mobile-compare-table .sticky {
+  position: relative;
+}
+
+.mobile-compare-table .sticky::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.dark .mobile-compare-table .sticky::after {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* Improve touch target sizes on mobile */
+@media (max-width: 768px) {
+  .mobile-compare-table a,
+  .mobile-compare-table button {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mobile-compare-table .badge-modern {
+    min-height: 24px;
+    padding: 0.25rem 0.5rem;
+  }
+}
