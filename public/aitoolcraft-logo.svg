@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <!-- Primary gradient for the main elements -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Secondary gradient for accent elements -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with subtle gradient -->
+  <circle cx="120" cy="120" r="110" fill="rgba(255,255,255,0.05)" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Main craft/tool symbol - centered hexagon with internal structure -->
+  <g transform="translate(120, 120)" filter="url(#shadow)">
+    <!-- Outer hexagon frame -->
+    <path d="M-40,0 L-20,-34.64 L20,-34.64 L40,0 L20,34.64 L-20,34.64 Z" 
+          fill="none" 
+          stroke="url(#primaryGradient)" 
+          stroke-width="4" 
+          filter="url(#glow)"/>
+    
+    <!-- Inner diamond representing AI core -->
+    <path d="M0,-25 L18,0 L0,25 L-18,0 Z" 
+          fill="url(#primaryGradient)" 
+          opacity="0.8"/>
+    
+    <!-- Central AI node -->
+    <circle cx="0" cy="0" r="8" fill="url(#accentGradient)"/>
+    <circle cx="0" cy="0" r="4" fill="white"/>
+    
+    <!-- Connection nodes at hexagon vertices -->
+    <circle cx="-30" cy="0" r="6" fill="url(#primaryGradient)"/>
+    <circle cx="30" cy="0" r="6" fill="url(#primaryGradient)"/>
+    <circle cx="-15" cy="-26" r="6" fill="url(#primaryGradient)"/>
+    <circle cx="15" cy="-26" r="6" fill="url(#primaryGradient)"/>
+    <circle cx="-15" cy="26" r="6" fill="url(#primaryGradient)"/>
+    <circle cx="15" cy="26" r="6" fill="url(#primaryGradient)"/>
+    
+    <!-- Connecting lines showing tool network -->
+    <line x1="0" y1="0" x2="-30" y2="0" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="0" y1="0" x2="30" y2="0" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="0" y1="0" x2="-15" y2="-26" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="0" y1="0" x2="15" y2="-26" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="0" y1="0" x2="-15" y2="26" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.6"/>
+    <line x1="0" y1="0" x2="15" y2="26" stroke="url(#primaryGradient)" stroke-width="2" opacity="0.6"/>
+  </g>
+  
+  <!-- Orbital elements representing AI tools -->
+  <g transform="translate(120, 120)">
+    <!-- Tool orbit 1 -->
+    <g transform="rotate(0)">
+      <circle cx="0" cy="-70" r="8" fill="url(#accentGradient)" opacity="0.8">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Tool icon inside -->
+      <rect x="-3" y="-73" width="6" height="6" fill="white" opacity="0.9">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 0 -70" to="360 0 -70" dur="20s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    
+    <!-- Tool orbit 2 -->
+    <g transform="rotate(120)">
+      <circle cx="0" cy="-70" r="8" fill="url(#accentGradient)" opacity="0.8">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="120 0 0" to="480 0 0" dur="20s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Tool icon inside -->
+      <circle cx="0" cy="-70" r="3" fill="white" opacity="0.9">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="120 0 0" to="480 0 0" dur="20s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Tool orbit 3 -->
+    <g transform="rotate(240)">
+      <circle cx="0" cy="-70" r="8" fill="url(#accentGradient)" opacity="0.8">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="240 0 0" to="600 0 0" dur="20s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Tool icon inside -->
+      <polygon points="0,-73 3,-67 -3,-67" fill="white" opacity="0.9">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="240 0 -70" to="600 0 -70" dur="20s" repeatCount="indefinite"/>
+      </polygon>
+    </g>
+  </g>
+  
+  <!-- Corner accent elements -->
+  <g opacity="0.4">
+    <!-- Top left -->
+    <circle cx="30" cy="30" r="3" fill="url(#accentGradient)"/>
+    <circle cx="45" cy="20" r="2" fill="url(#primaryGradient)"/>
+    
+    <!-- Top right -->
+    <circle cx="210" cy="30" r="3" fill="url(#accentGradient)"/>
+    <circle cx="195" cy="20" r="2" fill="url(#primaryGradient)"/>
+    
+    <!-- Bottom left -->
+    <circle cx="30" cy="210" r="3" fill="url(#accentGradient)"/>
+    <circle cx="45" cy="220" r="2" fill="url(#primaryGradient)"/>
+    
+    <!-- Bottom right -->
+    <circle cx="210" cy="210" r="3" fill="url(#accentGradient)"/>
+    <circle cx="195" cy="220" r="2" fill="url(#primaryGradient)"/>
+  </g>
+  
+  <!-- Subtle grid pattern in background -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="url(#primaryGradient)" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="240" height="240" fill="url(#grid)"/>
+</svg>

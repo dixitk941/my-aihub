@@ -9,6 +9,13 @@ export const handleLogoError = (e, category) => {
     'Voice Generation': '/logos/voice-generation.svg',
     'Video Generation': '/logos/video-generation.svg',
     'Code Generation': '/logos/code-generation.svg',
+    'Audio Generation': '/logos/voice-generation.svg',
+    'Music Generation': '/logos/voice-generation.svg',
+    'Chatbots': '/logos/text-generation.svg',
+    'Writing': '/logos/text-generation.svg',
+    'Research': '/logos/other.svg',
+    'Design': '/logos/image-generation.svg',
+    'Productivity': '/logos/other.svg',
     'Other': '/logos/other.svg'
   };
   

@@ -40,8 +40,15 @@ function Header({ darkMode, toggleDarkMode }) {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-primary-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent transition-all duration-300 hover:scale-105">
-              AI Tool Explorer
+            <Link to="/" className="flex items-center space-x-3 group transition-all duration-300 hover:scale-105">
+              <img 
+                src="/aitoolcraft-logo.svg" 
+                alt="AiToolCraft Logo" 
+                className="w-10 h-10 transition-transform duration-300 group-hover:rotate-12"
+              />
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                AiToolCraft
+              </span>
             </Link>
           </div>
           
@@ -94,6 +101,12 @@ function Header({ darkMode, toggleDarkMode }) {
             >
               Compare
             </Link>
+            <Link 
+              to="/blog" 
+              className="px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-800/80 hover:backdrop-blur-sm transition-all"
+            >
+              Blog
+            </Link>
             <button
               onClick={toggleDarkMode}
               className="ml-2 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-gray-100/90 dark:hover:bg-gray-700/90 transition-all shadow-soft-sm dark:shadow-dark-soft-sm backdrop-blur-sm border border-gray-100/30 dark:border-gray-700/30 active:scale-95"
@@ -129,6 +142,13 @@ function Header({ darkMode, toggleDarkMode }) {
                 onClick={() => setMenuOpen(false)}
               >
                 Compare
+              </Link>
+              <Link 
+                to="/blog" 
+                className="px-4 py-3 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-700/80 transition-colors active:scale-98"
+                onClick={() => setMenuOpen(false)}
+              >
+                Blog
               </Link>
             </nav>
           </div>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="80" r="40" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="700" cy="320" r="60" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="650" cy="100" r="30" fill="rgba(255,255,255,0.15)"/>
+  
+  <!-- Main content card -->
+  <rect x="100" y="80" width="600" height="240" rx="20" fill="url(#card)" opacity="0.9"/>
+  
+  <!-- Title -->
+  <text x="400" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#1f2937">
+    Top 10 AI Tools for Creators
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="400" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="18" text-anchor="middle" fill="#6b7280">
+    The Ultimate Guide for 2025
+  </text>
+  
+  <!-- AI Icons -->
+  <g transform="translate(200, 190)">
+    <!-- Brain icon -->
+    <circle cx="0" cy="0" r="25" fill="#4f46e5" opacity="0.8"/>
+    <path d="M-12,-8 Q-8,-15 0,-12 Q8,-15 12,-8 Q15,0 8,8 Q0,12 -8,8 Q-15,0 -12,-8" fill="white"/>
+  </g>
+  
+  <g transform="translate(300, 190)">
+    <!-- Gear icon -->
+    <circle cx="0" cy="0" r="25" fill="#7c3aed" opacity="0.8"/>
+    <circle cx="0" cy="0" r="8" fill="white"/>
+    <rect x="-2" y="-20" width="4" height="8" fill="white"/>
+    <rect x="-2" y="12" width="4" height="8" fill="white"/>
+    <rect x="12" y="-2" width="8" height="4" fill="white"/>
+    <rect x="-20" y="-2" width="8" height="4" fill="white"/>
+  </g>
+  
+  <g transform="translate(400, 190)">
+    <!-- Lightning icon -->
+    <circle cx="0" cy="0" r="25" fill="#059669" opacity="0.8"/>
+    <path d="M-8,-15 L5,-3 L-2,-3 L8,15 L-5,3 L2,3 Z" fill="white"/>
+  </g>
+  
+  <g transform="translate(500, 190)">
+    <!-- Star icon -->
+    <circle cx="0" cy="0" r="25" fill="#dc2626" opacity="0.8"/>
+    <path d="M0,-12 L3,-3 L12,0 L3,3 L0,12 L-3,3 L-12,0 L-3,-3 Z" fill="white"/>
+  </g>
+  
+  <g transform="translate(600, 190)">
+    <!-- Diamond icon -->
+    <circle cx="0" cy="0" r="25" fill="#ea580c" opacity="0.8"/>
+    <path d="M0,-15 L10,-5 L10,5 L0,15 L-10,5 L-10,-5 Z" fill="white"/>
+  </g>
+  
+  <!-- Bottom text -->
+  <text x="400" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="14" text-anchor="middle" fill="#9ca3af">
+    Comprehensive reviews and insights for modern creators
+  </text>
+</svg>

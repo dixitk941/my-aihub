@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Compare from './pages/Compare';
 import AiDetailPage from './pages/AiDetailPage';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import { aiTools } from './data/aiTools';
 import './App.css';
 
@@ -64,7 +66,7 @@ function Layout() {
       
       <footer className="glass-effect py-8 mt-12 border-t border-gray-200/10 dark:border-gray-700/10 relative z-10">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-600 dark:text-gray-400 mb-2">© {new Date().getFullYear()} AI Tool Explorer. All rights reserved.</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-2">© {new Date().getFullYear()} AiToolCraft. All rights reserved.</p>
           <p className="text-xs text-gray-500 dark:text-gray-500">Designed with a modern One UI 7 inspired interface</p>
         </div>
       </footer>
@@ -80,6 +82,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="compare" element={<Compare />} />
           <Route path="details/:id" element={<AiDetailPage />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogPost />} />
         </Route>
       </Routes>
     </BrowserRouter>

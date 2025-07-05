@@ -1,4 +1,5 @@
 import React from 'react';
+import { handleLogoError } from '../utils/logoUtils';
 
 function CompareTable({ tools }) {
 
@@ -28,27 +29,26 @@ function CompareTable({ tools }) {
 
       {/* Horizontal scrollable comparison table */}
       <div className="modern-card backdrop-blur-oneui overflow-hidden">
-        <div className="mobile-compare-table overflow-x-auto hide-scrollbar">
-          <table className="w-full min-w-max">
+        <div className="mobile-compare-table overflow-x-auto hide-scrollbar" data-tool-count={tools.length}>
+          <table className="w-full" style={{'--tool-count': tools.length}}>
             {/* Header with tool names and logos */}
             <thead className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-oneui sticky top-0 z-10">
               <tr>
-                <th className="text-left py-3 px-3 border-b border-gray-200/50 dark:border-gray-700/50 font-medium text-gray-600 dark:text-gray-200 bg-white/95 dark:bg-gray-800/95 sticky left-0 z-20 min-w-[100px]">
+                <th className="sticky text-left py-3 px-3 border-b border-gray-200/50 dark:border-gray-700/50 font-medium text-gray-600 dark:text-gray-200 bg-white/95 dark:bg-gray-800/95 left-0 z-20 min-w-[100px]">
                   <span className="text-xs">Features</span>
                 </th>
                 {tools.map(tool => (
                   <th key={tool.id} className="text-center py-3 px-4 border-b border-gray-200/50 dark:border-gray-700/50 font-medium text-gray-600 dark:text-gray-200 min-w-[140px] max-w-[160px]">
                     <div className="flex flex-col items-center space-y-2">
-                      {tool.logo && (
-                        <div className="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden bg-white/70 dark:bg-gray-800/40 p-1 flex items-center justify-center shadow-soft-sm backdrop-blur-sm border border-gray-100/40 dark:border-gray-700/30">
-                          <img 
-                            src={tool.logo} 
-                            alt={`${tool.name} logo`} 
-                            className="w-6 h-6 object-contain"
-                          />
-                        </div>
-                      )}
-                      <span className="text-xs font-semibold text-center leading-tight">{tool.name}</span>
+                      <div className="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden bg-white/70 dark:bg-gray-800/40 p-1 flex items-center justify-center shadow-soft-sm backdrop-blur-sm border border-gray-100/40 dark:border-gray-700/30">
+                        <img 
+                          src={tool.logo || `/logos/${tool.category.toLowerCase().replace(/ /g, '-')}.svg`} 
+                          alt={`${tool.name} logo`} 
+                          className="w-6 h-6 object-contain"
+                          onError={(e) => handleLogoError(e, tool.category)}
+                        />
+                      </div>
+                      <span className="text-xs font-semibold text-center leading-tight break-words">{tool.name}</span>
                     </div>
                   </th>
                 ))}
@@ -58,7 +58,7 @@ function CompareTable({ tools }) {
             <tbody className="divide-y divide-gray-200/50 dark:divide-gray-700/50">
               {/* Category Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Category
                 </td>
                 {tools.map(tool => (
@@ -72,19 +72,19 @@ function CompareTable({ tools }) {
               
               {/* Creator Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Creator
                 </td>
                 {tools.map(tool => (
                   <td key={`${tool.id}-creator`} className="py-3 px-4 text-gray-600 dark:text-gray-300 text-center text-xs">
-                    {tool.creator}
+                    <div className="line-clamp-2">{tool.creator}</div>
                   </td>
                 ))}
               </tr>
               
               {/* Free/Paid Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Pricing
                 </td>
                 {tools.map(tool => (
@@ -100,7 +100,7 @@ function CompareTable({ tools }) {
               
               {/* API Access Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   API
                 </td>
                 {tools.map(tool => (
@@ -116,7 +116,7 @@ function CompareTable({ tools }) {
               
               {/* Features Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Key Features
                 </td>
                 {tools.map(tool => (
@@ -126,7 +126,7 @@ function CompareTable({ tools }) {
                         {tool.features.slice(0, 3).map((feature, idx) => (
                           <div key={idx} className="flex items-start">
                             <span className="text-green-500 mr-1 flex-shrink-0">•</span>
-                            <span className="line-clamp-2">{feature}</span>
+                            <span className="line-clamp-2 break-words">{feature}</span>
                           </div>
                         ))}
                         {tool.features.length > 3 && (
@@ -144,7 +144,7 @@ function CompareTable({ tools }) {
               
               {/* Pricing Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Pricing Plans
                 </td>
                 {tools.map(tool => (
@@ -153,7 +153,7 @@ function CompareTable({ tools }) {
                       <div className="space-y-1.5">
                         {tool.pricing.slice(0, 2).map((plan, idx) => (
                           <div key={idx} className="border border-gray-200 dark:border-gray-700 rounded-lg p-2 bg-white/50 dark:bg-gray-800/50">
-                            <div className="font-medium text-gray-800 dark:text-white">{plan.plan}</div>
+                            <div className="font-medium text-gray-800 dark:text-white line-clamp-1">{plan.plan}</div>
                             <div className="text-primary-600 dark:text-primary-400 font-semibold">{plan.cost}</div>
                           </div>
                         ))}
@@ -172,7 +172,7 @@ function CompareTable({ tools }) {
               
               {/* Use Cases Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Use Cases
                 </td>
                 {tools.map(tool => (
@@ -182,7 +182,7 @@ function CompareTable({ tools }) {
                         {tool.useCases.slice(0, 3).map((useCase, idx) => (
                           <div key={idx} className="flex items-start">
                             <span className="text-blue-500 mr-1 flex-shrink-0">•</span>
-                            <span className="line-clamp-2">{useCase}</span>
+                            <span className="line-clamp-2 break-words">{useCase}</span>
                           </div>
                         ))}
                         {tool.useCases.length > 3 && (
@@ -200,12 +200,12 @@ function CompareTable({ tools }) {
               
               {/* Description Row */}
               <tr className="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Description
                 </td>
                 {tools.map(tool => (
                   <td key={`${tool.id}-desc`} className="py-3 px-4 text-gray-600 dark:text-gray-300 text-xs leading-relaxed max-w-[160px]">
-                    <div className="line-clamp-3 text-center">
+                    <div className="line-clamp-3 text-center break-words">
                       {tool.description}
                     </div>
                   </td>
@@ -214,7 +214,7 @@ function CompareTable({ tools }) {
               
               {/* Website Links Row */}
               <tr>
-                <td className="py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 sticky left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
+                <td className="sticky py-3 px-3 font-medium text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 left-0 z-10 text-xs border-r border-gray-200/50 dark:border-gray-700/50">
                   Website
                 </td>
                 {tools.map(tool => (
@@ -223,7 +223,7 @@ function CompareTable({ tools }) {
                       href={tool.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-2 py-1.5 text-xs bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-soft-sm transition-all hover:scale-105 active:scale-95"
+                      className="inline-flex items-center justify-center px-2 py-1.5 text-xs bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-soft-sm transition-all hover:scale-105 active:scale-95 min-h-[44px] min-w-[60px]"
                     >
                       Visit
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 ml-1">
@@ -257,15 +257,14 @@ function CompareTable({ tools }) {
             {tools.map(tool => (
               <th key={tool.id} className="text-left py-4 px-4 border-b border-gray-200/50 dark:border-gray-700/50 font-medium text-gray-600 dark:text-gray-200">
                 <div className="flex items-center">
-                  {tool.logo && (
-                    <div className="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden bg-white/70 dark:bg-gray-800/40 p-1 mr-2 flex items-center justify-center shadow-soft-sm backdrop-blur-sm border border-gray-100/40 dark:border-gray-700/30">
-                      <img 
-                        src={tool.logo} 
-                        alt={`${tool.name} logo`} 
-                        className="w-6 h-6 object-contain"
-                      />
-                    </div>
-                  )}
+                  <div className="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden bg-white/70 dark:bg-gray-800/40 p-1 mr-2 flex items-center justify-center shadow-soft-sm backdrop-blur-sm border border-gray-100/40 dark:border-gray-700/30">
+                    <img 
+                      src={tool.logo || `/logos/${tool.category.toLowerCase().replace(/ /g, '-')}.svg`} 
+                      alt={`${tool.name} logo`} 
+                      className="w-6 h-6 object-contain"
+                      onError={(e) => handleLogoError(e, tool.category)}
+                    />
+                  </div>
                   {tool.name}
                 </div>
               </th>

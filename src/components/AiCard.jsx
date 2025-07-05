@@ -56,17 +56,15 @@ function AiCard({ tool, onCompareToggle, isSelected }) {
         <div className="relative z-10">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
             <div className="flex items-center">
-              {tool.logo && (
-                <div className="w-12 h-12 flex-shrink-0 rounded-2xl overflow-hidden bg-white/70 dark:bg-gray-800/40 p-1.5 mr-3 flex items-center justify-center shadow-soft-md backdrop-blur-sm border border-gray-100/40 dark:border-gray-700/30 transition-all duration-300 group-hover:shadow-soft-lg">
-                  <img 
-                    src={tool.logo} 
-                    alt={`${tool.name} logo`} 
-                    className="w-9 h-9 object-contain transition-transform duration-500 group-hover:scale-110"
-                    onLoad={(e) => e.target.classList.add('loaded')}
-                    onError={(e) => handleLogoError(e, tool.category)}
-                  />
-                </div>
-              )}
+              <div className="w-12 h-12 flex-shrink-0 rounded-2xl overflow-hidden bg-white/70 dark:bg-gray-800/40 p-1.5 mr-3 flex items-center justify-center shadow-soft-md backdrop-blur-sm border border-gray-100/40 dark:border-gray-700/30 transition-all duration-300 group-hover:shadow-soft-lg">
+                <img 
+                  src={tool.logo || `/logos/${tool.category.toLowerCase().replace(/ /g, '-')}.svg`} 
+                  alt={`${tool.name} logo`} 
+                  className="w-9 h-9 object-contain transition-transform duration-500 group-hover:scale-110"
+                  onLoad={(e) => e.target.classList.add('loaded')}
+                  onError={(e) => handleLogoError(e, tool.category)}
+                />
+              </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white transition-colors duration-300">{tool.name}</h3>
                 {tool.creator && (
