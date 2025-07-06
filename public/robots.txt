@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://aitoolcraft.com/sitemap.xml
+
+# Block irrelevant paths
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /*.map$
+Disallow: /dist/
+Disallow: /.git/
+Disallow: /.vscode/
+
+# Allow specific file types
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.ico$
+
+# Crawl delay
+Crawl-delay: 1

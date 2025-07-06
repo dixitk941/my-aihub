@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import SEO from '../components/SEO';
 import { blogPosts } from '../data/blogPosts';
 import ReactMarkdown from 'react-markdown';
 
@@ -25,23 +26,36 @@ function BlogPost() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="modern-card backdrop-blur-oneui p-8 text-center">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
-              <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
-              <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
+      <>
+        <SEO 
+          title="Loading... - AiToolCraft Blog"
+          description="Loading blog post content..."
+          canonicalUrl={`/blog/${slug}`}
+        />
+        <div className="container mx-auto px-4 py-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="modern-card backdrop-blur-oneui p-8 text-center">
+              <div className="animate-pulse">
+                <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
+                <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
+                <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
   if (!post) {
     return (
-      <div className="container mx-auto px-4 py-6">
+      <>
+        <SEO 
+          title="Blog Post Not Found - AiToolCraft"
+          description="The blog post you're looking for doesn't exist or may have been moved."
+          canonicalUrl={`/blog/${slug}`}
+        />
+        <div className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="modern-card backdrop-blur-oneui p-8">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -61,12 +75,42 @@ function BlogPost() {
             </Link>
           </div>
         </div>
-      </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <>
+      <SEO 
+        title={`${post.title} - AiToolCraft Blog`}
+        description={post.excerpt}
+        keywords={post.tags ? post.tags.join(', ') : 'AI tools, artificial intelligence'}
+        canonicalUrl={`/blog/${post.slug}`}
+        image={post.featuredImage}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": post.excerpt,
+          "image": post.featuredImage,
+          "author": {
+            "@type": "Person",
+            "name": post.author
+          },
+          "publisher": {
+            "@type": "Organization", 
+            "name": "AiToolCraft"
+          },
+          "datePublished": post.publishDate,
+          "dateModified": post.publishDate,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://aitoolcraft.com/blog/${post.slug}`
+          }
+        }}
+      />
+      <div className="container mx-auto px-4 py-6">
       <div className="max-w-4xl mx-auto">
         {/* Back to Blog Link */}
         <div className="mb-6">
@@ -212,6 +256,7 @@ function BlogPost() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AiCard from '../components/AiCard';
 import SearchFilter from '../components/SearchFilter';
+import SEO from '../components/SEO';
 import { aiTools, categories } from '../data/aiTools';
 import { useOutletContext } from 'react-router-dom';
 
@@ -35,7 +36,29 @@ function Home() {
   }, [searchTerm, selectedCategory]);
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <>
+      <SEO 
+        title="AiToolCraft - Discover & Compare the Best AI Tools for 2025"
+        description="Explore our comprehensive directory of AI tools for creators, developers, and innovators. Compare features, pricing, and find the perfect AI solution for your needs."
+        keywords="AI tools directory, best AI tools 2025, artificial intelligence software, creative AI tools, productivity AI apps, AI comparison platform, machine learning tools, AI automation software, AI writing tools, AI image generators, AI video editors, AI chatbots, AI code generators, AI design tools, AI marketing tools, AI analytics tools, AI data analysis, AI voice tools, AI translation tools, OpenAI tools, GPT applications, ChatGPT alternatives, Claude AI, Midjourney AI, DALL-E alternatives, Stable Diffusion tools, AI content creation, AI workflow automation, enterprise AI solutions, free AI tools, paid AI software, AI tool reviews, AI tool comparison, AI directory 2025, AI marketplace, AI SaaS platforms, AI APIs, generative AI tools, conversational AI, AI assistants, AI plugins, AI integrations, AI for business, AI for developers, AI for creators, AI for marketers, AI for designers, AI for writers, AI for entrepreneurs, AI startups, AI innovation, AI technology trends, AI research tools, AI development platforms, neural network tools, deep learning software, natural language processing, computer vision AI, AI frameworks, TensorFlow tools, PyTorch applications, Hugging Face models, AI cloud services, AWS AI tools, Google AI platform, Microsoft AI services, Adobe AI features, Canva AI tools, Notion AI, Jasper AI, Copy.ai alternatives, AI tool catalog, AI tool database, AI tool collection, AI tool marketplace, AI resources, AI guides, AI tutorials, AI best practices, AI use cases, AI implementation, AI adoption, AI transformation"
+        canonicalUrl="/"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "AiToolCraft",
+          "url": "https://aitoolcraft.com",
+          "description": "Discover, compare, and master the best AI tools for creators, developers, and innovators.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://aitoolcraft.com/?search={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }}
+      />
+      <div className="container mx-auto px-4 py-6">
       <div className={`mb-10 text-center transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-primary-600 to-purple-600 bg-clip-text text-transparent pb-2 mb-4">
           Discover AI Tools
@@ -152,9 +175,8 @@ function Home() {
         </Link>
       )}
     </div>
+    </>
   );
 }
 
 export default Home;
-
-  

@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import SEO from '../components/SEO';
 import { aiTools } from '../data/aiTools';
 import { handleLogoError } from '../utils/logoUtils';
 
@@ -24,15 +25,28 @@ function AiDetailPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-12 flex justify-center">
-        <div className="w-12 h-12 rounded-full border-4 border-primary-600 border-t-transparent animate-spin"></div>
-      </div>
+      <>
+        <SEO 
+          title="Loading AI Tool Details... - AiToolCraft"
+          description="Loading AI tool information..."
+          canonicalUrl={`/tool/${id}`}
+        />
+        <div className="container mx-auto px-4 py-12 flex justify-center">
+          <div className="w-12 h-12 rounded-full border-4 border-primary-600 border-t-transparent animate-spin"></div>
+        </div>
+      </>
     );
   }
 
   if (!tool) {
     return (
-      <div className="container mx-auto px-4 py-12 text-center">
+      <>
+        <SEO 
+          title="AI Tool Not Found - AiToolCraft"
+          description="The AI tool you're looking for couldn't be found."
+          canonicalUrl={`/tool/${id}`}
+        />
+        <div className="container mx-auto px-4 py-12 text-center">
         <div className="modern-card p-8 max-w-2xl mx-auto">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16 mx-auto text-gray-400 mb-4">
             <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
@@ -43,7 +57,8 @@ function AiDetailPage() {
             Back to Home
           </Link>
         </div>
-      </div>
+        </div>
+      </>
     );
   }
 
@@ -83,7 +98,32 @@ function AiDetailPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
+      <SEO 
+        title={`${tool.name} - AI Tool Review & Details | AiToolCraft`}
+        description={tool.description}
+        keywords={`${tool.name}, ${tool.category}, AI tool, artificial intelligence, ${tool.features?.join(', ') || ''}`}
+        canonicalUrl={`/tool/${tool.id}`}
+        image={tool.logo}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": tool.name,
+          "description": tool.description,
+          "applicationCategory": tool.category,
+          "url": tool.website,
+          "offers": tool.pricing ? {
+            "@type": "Offer",
+            "description": tool.pricing
+          } : undefined,
+          "aggregateRating": tool.rating ? {
+            "@type": "AggregateRating", 
+            "ratingValue": tool.rating,
+            "ratingCount": 1
+          } : undefined
+        }}
+      />
+      <div className="container mx-auto px-4 py-8">
       <div className={`transition-all duration-700 ${isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <Link to="/" className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 mb-6 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-1">
@@ -222,6 +262,7 @@ function AiDetailPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
