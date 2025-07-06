@@ -3,7 +3,7 @@
 
 export const ADSENSE_CONFIG = {
   // Your Google AdSense publisher ID (replace with your actual ID)
-  publisherId: "ca-pub-XXXXXXXXXXXXXXXXX", // Get this from your AdSense account
+  publisherId: "ca-pub-2206627570123724", // Your actual Publisher ID
   
   // Ad slot IDs for different placements (create these in your AdSense account)
   adSlots: {
@@ -21,18 +21,14 @@ export const ADSENSE_CONFIG = {
   settings: {
     autoAds: true, // Enable auto ads
     responsiveAds: true, // Enable responsive ads
-    testMode: import.meta.env.DEV, // Disable ads in development
+    testMode: true, // Enable ads in development for testing
   }
 };
 
 // Helper function to check if ads should be displayed
 export const shouldShowAds = () => {
-  // Don't show ads in development unless specifically enabled
-  if (import.meta.env.DEV && !ADSENSE_CONFIG.settings.testMode) {
-    return false;
-  }
-  
-  // Add any other conditions where ads shouldn't be shown
+  // Show ads in development for testing and always in production
+  // Add any other conditions where ads shouldn't be shown here
   return true;
 };
 

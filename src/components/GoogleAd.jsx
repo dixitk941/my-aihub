@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 const GoogleAd = ({ 
-  adClient = "ca-pub-XXXXXXXXXXXXXXXXX", // Replace with your AdSense publisher ID
+  adClient = "ca-pub-2206627570123724", // Your AdSense publisher ID
   adSlot,
   adFormat = "auto",
   fullWidthResponsive = true,
