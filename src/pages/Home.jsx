@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AiCard from '../components/AiCard';
 import SearchFilter from '../components/SearchFilter';
 import SEO from '../components/SEO';
+import { HeaderAd, InContentAd, MobileAd } from '../components/GoogleAd';
+import { ADSENSE_CONFIG, shouldShowAds as _shouldShowAds } from '../config/adsense';
 import { aiTools, categories } from '../data/aiTools';
 import { useOutletContext } from 'react-router-dom';
 
@@ -67,6 +69,20 @@ function Home() {
           Explore and compare the latest AI tools to find the perfect solution for your needs.
         </p>
       </div>
+      
+      {/* Header Ad */}
+      {_shouldShowAds() && (
+        <>
+          <HeaderAd 
+            adClient={ADSENSE_CONFIG.publisherId} 
+            adSlot={ADSENSE_CONFIG.adSlots.header} 
+          />
+          <MobileAd 
+            adClient={ADSENSE_CONFIG.publisherId} 
+            adSlot={ADSENSE_CONFIG.adSlots.mobile} 
+          />
+        </>
+      )}
       
       {selectedTools.length > 0 && (
         <div className={`mb-8 modern-card p-5 relative overflow-hidden backdrop-blur-sm border border-gray-100/30 dark:border-white/5 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -147,16 +163,27 @@ function Home() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTools.map((tool, index) => (
-            <div 
-              key={tool.id} 
-              className={`transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
-              style={{ transitionDelay: `${200 + index * 50}ms` }}
-            >
-              <AiCard 
-                tool={tool}
-                onCompareToggle={toggleToolSelection}
-                isSelected={selectedTools.some(t => t.id === tool.id)}
-              />
+            <div key={`tool-${tool.id}`}>
+              <div 
+                className={`transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+                style={{ transitionDelay: `${200 + index * 50}ms` }}
+              >
+                <AiCard 
+                  tool={tool}
+                  onCompareToggle={toggleToolSelection}
+                  isSelected={selectedTools.some(t => t.id === tool.id)}
+                />
+              </div>
+              
+              {/* In-content ad after every 6 tools */}
+              {_shouldShowAds() && (index + 1) % 6 === 0 && index < filteredTools.length - 1 && (
+                <div className="col-span-full my-6">
+                  <InContentAd 
+                    adClient={ADSENSE_CONFIG.publisherId} 
+                    adSlot={ADSENSE_CONFIG.adSlots.inContent} 
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>

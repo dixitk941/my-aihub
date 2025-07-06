@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
+import { SidebarAd, InContentAd } from '../components/GoogleAd';
+import { ADSENSE_CONFIG, shouldShowAds as _shouldShowAds } from '../config/adsense';
 import { blogPosts } from '../data/blogPosts';
 import ReactMarkdown from 'react-markdown';
 
@@ -184,6 +186,16 @@ function BlogPost() {
                 )}
               </div>
             </div>
+
+            {/* Blog post top ad */}
+            {_shouldShowAds() && (
+              <div className="mb-8">
+                <InContentAd 
+                  adClient={ADSENSE_CONFIG.publisherId} 
+                  adSlot={ADSENSE_CONFIG.adSlots.blogPost} 
+                />
+              </div>
+            )}
 
             {/* Blog Content */}
             <div className="prose prose-lg dark:prose-invert max-w-none">

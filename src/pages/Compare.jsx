@@ -2,6 +2,8 @@ import { useOutletContext } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import CompareTable from '../components/CompareTable';
 import SEO from '../components/SEO';
+import { SidebarAd, InContentAd } from '../components/GoogleAd';
+import { ADSENSE_CONFIG, shouldShowAds as _shouldShowAds } from '../config/adsense';
 import { handleLogoError } from '../utils/logoUtils';
 
 function Compare() {
@@ -65,6 +67,16 @@ function Compare() {
             Compare features and capabilities of different AI tools side by side.
           </p>
         </div>
+        
+        {/* Comparison page ad */}
+        {_shouldShowAds() && (
+          <div className="mb-6">
+            <InContentAd 
+              adClient={ADSENSE_CONFIG.publisherId} 
+              adSlot={ADSENSE_CONFIG.adSlots.comparison} 
+            />
+          </div>
+        )}
         
         <div className="mb-6 modern-card backdrop-blur-oneui p-4">
           <div className="flex flex-col gap-3">

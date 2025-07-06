@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
+import { SidebarAd, InContentAd } from '../components/GoogleAd';
+import { ADSENSE_CONFIG, shouldShowAds as _shouldShowAds } from '../config/adsense';
 import { aiTools } from '../data/aiTools';
 import { handleLogoError } from '../utils/logoUtils';
 
@@ -196,68 +198,16 @@ function AiDetailPage() {
                 </a>
               </div>
             </div>
-            
-            {/* Description */}
-            <div className={`mt-8 transition-all duration-500 delay-200 ${isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Description</h2>
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-5 border border-gray-100/30 dark:border-gray-700/30 shadow-soft-sm">
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{tool.description}</p>
+
+            {/* Tool detail page ad */}
+            {_shouldShowAds() && (
+              <div className="my-8">
+                <InContentAd 
+                  adClient={ADSENSE_CONFIG.publisherId} 
+                  adSlot={ADSENSE_CONFIG.adSlots.toolDetail} 
+                />
               </div>
-            </div>
-            
-            {/* Key Features */}
-            <div className={`mt-8 transition-all duration-500 delay-300 ${isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Key Features</h2>
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-5 border border-gray-100/30 dark:border-gray-700/30 shadow-soft-sm">
-                <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                  {tool.features ? (
-                    tool.features.map((feature, index) => (
-                      <li key={index} className="pl-2">{feature}</li>
-                    ))
-                  ) : (
-                    <li className="text-gray-500 dark:text-gray-400 italic">No feature details available</li>
-                  )}
-                </ul>
-              </div>
-            </div>
-            
-            {/* Pricing */}
-            <div className={`mt-8 transition-all duration-500 delay-400 ${isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Pricing</h2>
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-5 border border-gray-100/30 dark:border-gray-700/30 shadow-soft-sm">
-                {tool.pricing ? (
-                  <div className="space-y-3">
-                    {tool.pricing.map((price, index) => (
-                      <div key={index} className="flex flex-col">
-                        <span className="font-medium text-gray-800 dark:text-white">{price.plan}</span>
-                        <span className="text-gray-700 dark:text-gray-300">{price.cost}</span>
-                        {price.description && <span className="text-sm text-gray-500 dark:text-gray-400">{price.description}</span>}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-gray-700 dark:text-gray-300">
-                    {tool.free ? 'This tool is available for free.' : 'Pricing information not available. Please check the official website for details.'}
-                  </p>
-                )}
-              </div>
-            </div>
-            
-            {/* Use Cases */}
-            <div className={`mt-8 transition-all duration-500 delay-500 ${isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Use Cases</h2>
-              <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl p-5 border border-gray-100/30 dark:border-gray-700/30 shadow-soft-sm">
-                <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                  {tool.useCases ? (
-                    tool.useCases.map((useCase, index) => (
-                      <li key={index} className="pl-2">{useCase}</li>
-                    ))
-                  ) : (
-                    <li className="text-gray-500 dark:text-gray-400 italic">No use case details available</li>
-                  )}
-                </ul>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

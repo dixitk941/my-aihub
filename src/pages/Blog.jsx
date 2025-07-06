@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { SidebarAd, InContentAd } from '../components/GoogleAd';
+import { ADSENSE_CONFIG, shouldShowAds as _shouldShowAds } from '../config/adsense';
 import { blogPosts } from '../data/blogPosts';
 
 function Blog() {
@@ -50,6 +52,16 @@ function Blog() {
             Insights, reviews, and the latest trends in artificial intelligence and creative tools.
           </p>
         </div>
+
+        {/* Blog header ad */}
+        {_shouldShowAds() && (
+          <div className="mb-8">
+            <InContentAd 
+              adClient={ADSENSE_CONFIG.publisherId} 
+              adSlot={ADSENSE_CONFIG.adSlots.inContent} 
+            />
+          </div>
+        )}
 
         {/* Category Filter */}
         <div className="mb-8 flex justify-center">
