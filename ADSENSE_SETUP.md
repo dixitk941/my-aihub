@@ -35,6 +35,7 @@ In your AdSense dashboard, create the following ad units:
 - **Blog Post Ad**: Article content ad
 - **Tool Detail Ad**: Tool page content ad
 - **Comparison Ad**: Comparison page ad
+- **Display Ad**: 300x250 rectangle for various placement options
 
 #### For each ad unit:
 1. Click "Ad units" in AdSense
@@ -59,6 +60,7 @@ export const ADSENSE_CONFIG = {
     blogPost: "YOUR-BLOG-POST-SLOT-ID",
     toolDetail: "YOUR-TOOL-DETAIL-SLOT-ID",
     comparison: "YOUR-COMPARISON-SLOT-ID",
+    display: "YOUR-DISPLAY-SLOT-ID",
   }
 };
 ```

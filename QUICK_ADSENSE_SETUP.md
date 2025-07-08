@@ -47,6 +47,11 @@ Go to your [Google AdSense dashboard](https://www.google.com/adsense/) and creat
    - Size: 300x250
    - Copy the Ad Slot ID
 
+8. **Display Ad** (300x250 Rectangle)
+   - Name: "AiToolCraft Display"
+   - Size: 300x250
+   - Copy the Ad Slot ID
+
 ### 2. Update Ad Slot IDs
 
 After creating ad units, edit `src/config/adsense.js` and replace the slot IDs:
@@ -60,6 +65,7 @@ adSlots: {
   blogPost: "YOUR_BLOG_POST_SLOT_ID",   // Replace with actual slot ID
   toolDetail: "YOUR_TOOL_DETAIL_SLOT_ID", // Replace with actual slot ID
   comparison: "YOUR_COMPARISON_SLOT_ID", // Replace with actual slot ID
+  display: "YOUR_DISPLAY_SLOT_ID",      // Replace with actual slot ID
 }
 ```
 

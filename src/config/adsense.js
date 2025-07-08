@@ -7,14 +7,15 @@ export const ADSENSE_CONFIG = {
   
   // Ad slot IDs for different placements (create these in your AdSense account)
   adSlots: {
-    header: "XXXXXXXXXX", // Header leaderboard ad
-    sidebar: "XXXXXXXXXX", // Sidebar rectangle ad  
-    mobile: "XXXXXXXXXX", // Mobile banner ad
-    inContent: "XXXXXXXXXX", // In-content ad
-    bottom: "XXXXXXXXXX", // Bottom banner ad
-    blogPost: "XXXXXXXXXX", // Blog post content ad
-    toolDetail: "XXXXXXXXXX", // Tool detail page ad
-    comparison: "XXXXXXXXXX", // Comparison page ad
+    header: "8616546385", // Header leaderboard ad
+    sidebar: "1427462053", // Sidebar rectangle ad  
+    mobile: "2714345388", // Mobile banner ad
+    inContent: "9785304706", // In-content ad
+    bottom: "5779787358", // Bottom banner ad
+    blogPost: "1840662010", // Blog post content ad
+    toolDetail: "7427470016", // Tool detail page ad
+    comparison: "4801304675", // Comparison page ad
+    display: "3488421337", // Display ad slot
   },
   
   // Ad settings

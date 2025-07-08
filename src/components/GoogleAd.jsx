@@ -93,4 +93,14 @@ export const BottomAd = ({ adClient, adSlot }) => (
   />
 );
 
+export const DisplayAd = ({ adClient, adSlot }) => (
+  <GoogleAd
+    adClient={adClient}
+    adSlot={adSlot}
+    adFormat="display"
+    style={{ display: 'block', width: '300px', height: '250px' }}
+    className="mx-auto my-4"
+  />
+);
+
 export default GoogleAd;
