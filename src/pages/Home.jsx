@@ -7,6 +7,12 @@ import { HeaderAd, InContentAd, MobileAd } from '../components/GoogleAd';
 import { ADSENSE_CONFIG, shouldShowAds as _shouldShowAds } from '../config/adsense';
 import { aiTools, categories } from '../data/aiTools';
 import { useOutletContext } from 'react-router-dom';
+import CategoriesGrid from '../components/CategoriesGrid';
+import FeatureShowcase from '../components/FeatureShowcase';
+import TrendingAITools from '../components/TrendingAITools';
+import Newsletter from '../components/Newsletter';
+import UserTestimonials from '../components/UserTestimonials';
+import CallToAction from '../components/CallToAction';
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -69,6 +75,9 @@ function Home() {
           Explore and compare the latest AI tools to find the perfect solution for your needs.
         </p>
       </div>
+      
+      {/* Feature Showcase */}
+      <FeatureShowcase />
       
       {/* Header Ad */}
       {_shouldShowAds() && (
@@ -147,47 +156,65 @@ function Home() {
         />
       </div>
       
-      {filteredTools.length === 0 ? (
-        <div className={`text-center p-12 modern-card transition-all duration-500 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-20 h-20 mx-auto text-gray-300 dark:text-gray-600 mb-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-          </svg>
-          <p className="text-gray-600 dark:text-gray-300 mb-6 text-xl font-light">No AI tools found matching your search criteria.</p>
-          <button 
-            onClick={() => {setSearchTerm(''); setSelectedCategory('');}}
-            className="btn-modern px-6 py-2.5 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 rounded-xl hover:bg-primary-200 dark:hover:bg-primary-800/40 transition-colors shadow-soft-sm"
-          >
-            Clear filters
-          </button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTools.map((tool, index) => (
-            <div key={`tool-${tool.id}`}>
-              <div 
-                className={`transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
-                style={{ transitionDelay: `${200 + index * 50}ms` }}
+      {/* Categories Grid */}
+      <CategoriesGrid categories={categories} />
+      
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
+        <div className="lg:col-span-3">
+          {filteredTools.length === 0 ? (
+            <div className={`text-center p-12 modern-card transition-all duration-500 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor" className="w-20 h-20 mx-auto text-gray-300 dark:text-gray-600 mb-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 text-xl font-light">No AI tools found matching your search criteria.</p>
+              <button 
+                onClick={() => {setSearchTerm(''); setSelectedCategory('');}}
+                className="btn-modern px-6 py-2.5 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 rounded-xl hover:bg-primary-200 dark:hover:bg-primary-800/40 transition-colors shadow-soft-sm"
               >
-                <AiCard 
-                  tool={tool}
-                  onCompareToggle={toggleToolSelection}
-                  isSelected={selectedTools.some(t => t.id === tool.id)}
-                />
-              </div>
-              
-              {/* In-content ad after every 6 tools */}
-              {_shouldShowAds() && (index + 1) % 6 === 0 && index < filteredTools.length - 1 && (
-                <div className="col-span-full my-6">
-                  <InContentAd 
-                    adClient={ADSENSE_CONFIG.publisherId} 
-                    adSlot={ADSENSE_CONFIG.adSlots.inContent} 
-                  />
-                </div>
-              )}
+                Clear filters
+              </button>
             </div>
-          ))}
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+              {filteredTools.map((tool, index) => (
+                <div key={`tool-${tool.id}`}>
+                  <div 
+                    className={`transition-all duration-500 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+                    style={{ transitionDelay: `${200 + index * 50}ms` }}
+                  >
+                    <AiCard 
+                      tool={tool}
+                      onCompareToggle={toggleToolSelection}
+                      isSelected={selectedTools.some(t => t.id === tool.id)}
+                    />
+                  </div>
+                  
+                  {/* In-content ad after every 6 tools */}
+                  {_shouldShowAds() && (index + 1) % 6 === 0 && index < filteredTools.length - 1 && (
+                    <div className="col-span-full my-6">
+                      <InContentAd 
+                        adClient={ADSENSE_CONFIG.publisherId} 
+                        adSlot={ADSENSE_CONFIG.adSlots.inContent} 
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+        
+        <div className="lg:col-span-1 space-y-6">
+          <TrendingAITools tools={aiTools} maxDisplay={4} />
+          <Newsletter />
+        </div>
+      </div>
+      
+      {/* User Testimonials */}
+      <UserTestimonials />
+      
+      {/* Call to Action */}
+      <CallToAction />
       
       {/* Floating action button for mobile - only shown when tools are selected */}
       {selectedTools.length > 0 && (

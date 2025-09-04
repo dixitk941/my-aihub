@@ -6,6 +6,15 @@ function AiCard({ tool, onCompareToggle, isSelected }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [rating, setRating] = useState(tool.rating || Math.floor(Math.random() * 2) + 4); // Random rating between 4-5 if not provided
+  const [hoverRating, setHoverRating] = useState(0);
+
+  // Check if tool is bookmarked on mount
+  useEffect(() => {
+    const bookmarkedTools = JSON.parse(localStorage.getItem('bookmarkedTools') || '[]');
+    setIsBookmarked(bookmarkedTools.includes(tool.id));
+  }, [tool.id]);
 
   // Animation on mount
   useEffect(() => {
@@ -14,6 +23,24 @@ function AiCard({ tool, onCompareToggle, isSelected }) {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+
+  // Handle bookmark toggle
+  const toggleBookmark = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const bookmarkedTools = JSON.parse(localStorage.getItem('bookmarkedTools') || '[]');
+    
+    if (isBookmarked) {
+      const updatedBookmarks = bookmarkedTools.filter(id => id !== tool.id);
+      localStorage.setItem('bookmarkedTools', JSON.stringify(updatedBookmarks));
+    } else {
+      bookmarkedTools.push(tool.id);
+      localStorage.setItem('bookmarkedTools', JSON.stringify(bookmarkedTools));
+    }
+    
+    setIsBookmarked(!isBookmarked);
+  };
 
   // Generate a unique background gradient based on the tool category
   const getBgGradient = () => {
@@ -51,6 +78,23 @@ function AiCard({ tool, onCompareToggle, isSelected }) {
         {/* iOS-style decorative elements */}
         <div className="absolute -right-16 -top-16 w-32 h-32 rounded-full bg-primary-500/10 dark:bg-primary-400/10 blur-2xl transition-opacity duration-700 opacity-0 group-hover:opacity-70"></div>
         <div className="absolute -left-16 -bottom-16 w-32 h-32 rounded-full bg-indigo-500/10 dark:bg-indigo-400/10 blur-2xl transition-opacity duration-700 opacity-0 group-hover:opacity-70"></div>
+        
+        {/* Bookmark button */}
+        <button
+          onClick={toggleBookmark}
+          className="absolute top-3 right-3 z-20 p-1.5 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 transition-all duration-300 hover:bg-white dark:hover:bg-gray-700"
+          aria-label={isBookmarked ? "Remove from bookmarks" : "Add to bookmarks"}
+        >
+          {isBookmarked ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-primary-600 dark:text-primary-400">
+              <path fillRule="evenodd" d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 001.075.676L10 15.082l5.925 2.844A.75.75 0 0017 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0010 2z" clipRule="evenodd" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-gray-500 dark:text-gray-400">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+            </svg>
+          )}
+        </button>
         
         {/* Card Content */}
         <div className="relative z-10">
@@ -114,7 +158,42 @@ function AiCard({ tool, onCompareToggle, isSelected }) {
             </span>
           </div>
           
-          <p className="text-gray-600 dark:text-gray-300 text-xs leading-relaxed line-clamp-3 mb-6">{tool.description}</p>
+          <p className="text-gray-600 dark:text-gray-300 text-xs leading-relaxed line-clamp-3 mb-3">{tool.description}</p>
+          
+          {/* Star Rating */}
+          <div className="flex items-center mb-4">
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button 
+                  key={star}
+                  type="button"
+                  onMouseEnter={() => setHoverRating(star)}
+                  onMouseLeave={() => setHoverRating(0)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setRating(star);
+                  }}
+                  className="cursor-pointer p-0.5 focus:outline-none"
+                >
+                  <svg 
+                    className={`w-4 h-4 transition-colors duration-200 
+                      ${(hoverRating !== 0 ? star <= hoverRating : star <= rating) 
+                        ? 'text-yellow-400' 
+                        : 'text-gray-300 dark:text-gray-600'}`} 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </button>
+              ))}
+            </div>
+            <span className="ml-1.5 text-xs text-gray-500 dark:text-gray-400">
+              {rating.toFixed(1)}
+            </span>
+          </div>
           
           <div className="flex justify-between items-center mt-auto">
             <a 

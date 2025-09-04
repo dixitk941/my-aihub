@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function SearchFilter({ searchTerm, setSearchTerm, selectedCategory, setSelectedCategory, categories }) {
+  // Listen for category selection events from CategoriesGrid
+  useEffect(() => {
+    const handleCategorySelect = (event) => {
+      setSelectedCategory(event.detail);
+    };
+    
+    window.addEventListener('selectCategory', handleCategorySelect);
+    
+    return () => {
+      window.removeEventListener('selectCategory', handleCategorySelect);
+    };
+  }, [setSelectedCategory]);
+
   return (
     <div className="mb-6 glass-effect p-3 sm:p-4 rounded-3xl backdrop-blur-oneui">
       <div className="flex flex-row items-center gap-2 sm:gap-4">
